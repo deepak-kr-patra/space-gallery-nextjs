@@ -1,0 +1,92 @@
+.rocket-image {
+    height: 6vmin;
+    left: 100vw;
+    animation: flyin 3s linear;
+}
+
+@keyframes flyin {
+    0% {
+        transform: translateX(-110vw);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.alphabet {
+    opacity: 0;
+    transition: all 1s;
+    filter: blur(5px);
+    font-family: "Lilita One", sans-serif;
+}
+
+.showAlphabet {
+    opacity: 1;
+    filter: blur(0);
+}
+
+.alphabet:nth-child(1) {
+    transition-delay: 1200ms;
+}
+
+.alphabet:nth-child(2) {
+    transition-delay: 1250ms;
+}
+
+.alphabet:nth-child(3) {
+    transition-delay: 1300ms;
+}
+
+.alphabet:nth-child(4) {
+    transition-delay: 1350ms;
+}
+
+.alphabet:nth-child(5) {
+    transition-delay: 1400ms;
+}
+
+.alphabet:nth-child(6) {
+    transition-delay: 1450ms;
+}
+
+.alphabet:nth-child(7) {
+    transition-delay: 1500ms;
+}
+
+.alphabet:nth-child(8) {
+    transition-delay: 1550ms;
+}
+
+.alphabet:nth-child(9) {
+    transition-delay: 1600ms;
+}
+
+.alphabet:nth-child(10) {
+    transition-delay: 1650ms;
+}
+
+.alphabet:nth-child(11) {
+    transition-delay: 1700ms;
+}
+
+.alphabet:nth-child(12) {
+    transition-delay: 1750ms;
+}
+
+.alphabet:nth-child(13) {
+    transition-delay: 1800ms;
+}
+
+.intro-n-btn {
+    opacity: 0;
+    scale: 0;
+    transition: all 1.5s 3s;
+    filter: blur(5px);
+}
+
+.show-intro-n-btn {
+    opacity: 1;
+    scale: 1;
+    filter: blur(0);
+}
