@@ -24,7 +24,7 @@ const VideoSectionContent = ({ imageData }) => {
             <div className={`${videoSecWidth} ${videoSecHeight} rounded-lg relative`}>
                 {imageData.media_type === "video" ? (
                     <Link href={imageData.url} target='_blank'>
-                        <img src={imageData.thumbnail_url} alt="image" className='w-full h-full rounded-lg object-cover cursor-pointer' />
+                        <img src={imageData.thumbnail_url} alt="thumbnail image" className='w-full h-full rounded-lg object-cover cursor-pointer' />
                         <div className='play-button'>
                             <FaPlayCircle />
                         </div>

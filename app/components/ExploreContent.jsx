@@ -8,7 +8,6 @@ const ExploreContent = () => {
 
     const { screenWidth } = useScreenWidth();
 
-    // const flexDir = screenWidth < 800 ? "flex-col" : "flex-col";
     const headingSize = screenWidth < 700 ? "text-[5vmin]" : "text-[6vmin]";
 
     return (
@@ -17,8 +16,8 @@ const ExploreContent = () => {
             <div className='w-full h-[40%] flex'>
                 <div className='w-[70%] h-full flex flex-col items-center justify-center gap-3'>
                     <h3 className={`w-full text-white ${headingSize} text-start`}>Hello, Human</h3>
-                    <p className={`text-white about-explanation text-justify`}>Here you can view Astronomy Picture Of the Day, by NASA. NASA publishes best astronomy picture of a day on it's APOD API service, since 16 June 1995.</p>
-                    <p className={`text-white about-explanation text-justify`}>You can view spectacular images and videos of a date, or within a range of dates, or several images and videos of random dates.</p>
+                    <p className='text-white about-explanation text-justify'>Here you can view Astronomy Picture Of the Day, by NASA. NASA publishes best astronomy picture of a day on it's APOD API service, since 16 June 1995.</p>
+                    <p className='text-white about-explanation text-justify'>You can view spectacular images and videos of a date, or within a range of dates, or several images and videos of random dates.</p>
                 </div>
                 <div className='w-[30%] h-full flex flex-col items-center justify-center p-2'>
                     <img src="/astronaut.png" alt="astronaut image" className='astronaut-image' />
@@ -26,7 +25,7 @@ const ExploreContent = () => {
             </div>
 
             {/* bottom half */}
-            <div className={`w-full h-[60%] flex flex-col items-center justify-evenly gap-4`}>
+            <div className='w-full h-[60%] flex flex-col items-center justify-evenly gap-4'>
                 <Card />
             </div>
         </>
