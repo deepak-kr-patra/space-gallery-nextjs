@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import usePicsParameters from '../../zustand/usePicsParameters';
 import { useRouter } from 'next/navigation';
@@ -11,18 +13,20 @@ const ViewPotd = () => {
     const { replace } = useRouter();
 
     const setDateValue = () => {
-        setDate(null);
+        if (typeof window !== 'undefined') {
+            setDate(null);
 
-        const inputDate = document.getElementById('date').value;
+            const inputDate = document.getElementById('date').value;
 
-        if (inputDate && !validDate(inputDate)) {
-            toast.error("Enter date from 16-06-1995 to today");
-            return;
+            if (inputDate && !validDate(inputDate)) {
+                toast.error("Enter date from 16-06-1995 to today");
+                return;
+            }
+
+            setDate(inputDate);
+            localStorage.setItem("date", inputDate);
+            replace('/explore/potd/pic');
         }
-
-        setDate(inputDate);
-        localStorage.setItem("date", inputDate);
-        replace('/explore/potd/pic');
     }
 
     return (

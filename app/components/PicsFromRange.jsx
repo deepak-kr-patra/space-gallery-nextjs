@@ -6,21 +6,27 @@ import Loader from './Loader';
 import PicSlide from './PicSlide';
 import MaximizedPicture from './MaximizedPicture';
 import useGetImagesFromRange from '../hooks/useGetImagesFromRange'
+import usePicsParameters from '../zustand/usePicsParameters';
 
 
 const PicsFromRange = () => {
 
-    let startDate = localStorage.getItem("start-date") || null;
-    let endDate = localStorage.getItem("end-date") || null;
+    const { startDate, endDate } = usePicsParameters();
+    let given_startDate = startDate;
+    let given_endDate = endDate;
+    if (typeof window !== 'undefined') {
+        given_startDate = localStorage.getItem("start-date") || null;
+        given_endDate = localStorage.getItem("end-date") || null;
+    }
 
     const { replace } = useRouter();
     useEffect(() => {
-        if (!startDate) {
+        if (!given_startDate) {
             replace('/explore/potd');
         }
     }, [])
 
-    const { loading, imagesData } = useGetImagesFromRange(startDate, endDate);
+    const { loading, imagesData } = useGetImagesFromRange(given_startDate, given_endDate);
 
     return (
         <>

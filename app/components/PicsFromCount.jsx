@@ -6,20 +6,25 @@ import Loader from './Loader';
 import PicSlide from './PicSlide';
 import MaximizedPicture from './MaximizedPicture';
 import useGetImagesFromCount from '../hooks/useGetImagesFromCount';
+import usePicsParameters from '../zustand/usePicsParameters';
 
 
 const PicsFromCount = () => {
 
-    let count = localStorage.getItem("count") || 0;
+    const { count } = usePicsParameters();
+    let given_count = count;
+    if (typeof window !== 'undefined') {
+        given_count = localStorage.getItem("count") || 0;
+    }
 
     const { replace } = useRouter();
     useEffect(() => {
-        if (count <= 0) {
+        if (given_count <= 0) {
             replace('/explore/potd');
         }
     }, [])
 
-    const { loading, imagesData } = useGetImagesFromCount(count);
+    const { loading, imagesData } = useGetImagesFromCount(given_count);
 
     return (
         <>

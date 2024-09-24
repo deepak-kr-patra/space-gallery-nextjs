@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import { useRouter } from 'next/navigation';
 import usePicsParameters from '../../zustand/usePicsParameters'
@@ -9,46 +11,47 @@ import validDateRange from '../../utilities/validDateRange';
 const ViewPotdFromRange = ({ width }) => {
 
     const { setStartDate, setEndDate } = usePicsParameters();
-    // const navigate = useNavigate();
     const { replace } = useRouter();
 
     const setDates = () => {
-        setStartDate(null);
-        setEndDate(null);
+        if (typeof window !== 'undefined') {
+            setStartDate(null);
+            setEndDate(null);
 
-        const inputStartDate = document.getElementById('startDate').value;
-        const inputEndDate = document.getElementById('endDate').value;
+            const inputStartDate = document.getElementById('startDate').value;
+            const inputEndDate = document.getElementById('endDate').value;
 
-        // if start date is not provided by user
-        if (!inputStartDate) {
-            toast.error("Enter a start date");
-            return;
+            // if start date is not provided by user
+            if (!inputStartDate) {
+                toast.error("Enter a start date");
+                return;
+            }
+
+            // if start date is invalid
+            if (!validDate(inputStartDate)) {
+                toast.error("Enter start date from 16-06-1995 to today");
+                return;
+            }
+
+            // if end date provided is invalid
+            if (inputEndDate && !validDate(inputEndDate)) {
+                toast.error("Enter end date from 16-06-1995 to today");
+                return;
+            }
+
+            // if date range is invalid
+            if (!validDateRange(inputStartDate, inputEndDate)) {
+                return;
+            }
+
+            setStartDate(inputStartDate);
+            setEndDate(inputEndDate);
+
+            localStorage.setItem("start-date", inputStartDate);
+            localStorage.setItem("end-date", inputEndDate);
+
+            replace('/explore/potd/pics-from-range');
         }
-
-        // if start date is invalid
-        if (!validDate(inputStartDate)) {
-            toast.error("Enter start date from 16-06-1995 to today");
-            return;
-        }
-
-        // if end date provided is invalid
-        if (inputEndDate && !validDate(inputEndDate)) {
-            toast.error("Enter end date from 16-06-1995 to today");
-            return;
-        }
-
-        // if date range is invalid
-        if (!validDateRange(inputStartDate, inputEndDate)) {
-            return;
-        }
-
-        setStartDate(inputStartDate);
-        setEndDate(inputEndDate);
-
-        localStorage.setItem("start-date", inputStartDate);
-        localStorage.setItem("end-date", inputEndDate);
-
-        replace('/explore/potd/pics-from-range');
     }
 
     return (

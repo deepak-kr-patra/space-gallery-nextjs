@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import Link from 'next/link';
 import formatDate from '../../utilities/formatDate';
@@ -11,10 +13,12 @@ const ImageSectionContent = ({ imageData }) => {
     const { screenWidth } = useScreenWidth();
 
     const showMaximizedPic = () => {
-        const maximizedPic = document.getElementById('maximizedPic');
-
-        setMaximizedPicURL(imageData.url);
-        maximizedPic.classList.add('showMaximizedPic');
+        if (typeof window !== 'undefined') {
+            const maximizedPic = document.getElementById('maximizedPic');
+    
+            setMaximizedPicURL(imageData.url);
+            maximizedPic.classList.add('showMaximizedPic');
+        }
     }
 
     const imageSecWidth = screenWidth < 450 ? "w-full" : "w-[60%]";

@@ -12,27 +12,30 @@ const MaximizedPicture = () => {
     // to fit the image according to screen
     useEffect(() => {
         const maximizeImage = () => {
-            const img = document.getElementById('selectedImage');
-            const screenAspectRatio = window.innerWidth / window.innerHeight;
-            const imgAspectRatio = img.naturalWidth / img.naturalHeight;
+            if (typeof window !== 'undefined') {
+                let img = document.getElementById('selectedImage');
+                let screenAspectRatio = window.innerWidth / window.innerHeight;
+                let imgAspectRatio = img.naturalWidth / img.naturalHeight;
 
-            if (imgAspectRatio > screenAspectRatio) {
-                // Fit by width
-                img.style.width = '100%';
-                img.style.height = 'auto';
-            } else {
-                // Fit by height
-                img.style.width = 'auto';
-                img.style.height = '100%';
+                if (imgAspectRatio > screenAspectRatio) {
+                    // Fit by width
+                    img.style.width = '100%';
+                    img.style.height = 'auto';
+                } else {
+                    // Fit by height
+                    img.style.width = 'auto';
+                    img.style.height = '100%';
+                }
             }
         }
         maximizeImage();
     });
 
-    const maximizedPic = document.getElementById('maximizedPic');
-
     const hideMaximizedPic = () => {
-        maximizedPic.classList.contains('showMaximizedPic') ? maximizedPic.classList.remove('showMaximizedPic') : maximizedPic.classList.add('showMaximizedPic');
+        if (typeof window !== 'undefined') {
+            const maximizedPic = document.getElementById('maximizedPic');
+            maximizedPic.classList.contains('showMaximizedPic') ? maximizedPic.classList.remove('showMaximizedPic') : maximizedPic.classList.add('showMaximizedPic');
+        }
     }
 
     return (

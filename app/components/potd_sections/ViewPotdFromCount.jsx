@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import usePicsParameters from '../../zustand/usePicsParameters';
 import toast from 'react-hot-toast';
@@ -7,21 +9,22 @@ import { useRouter } from 'next/navigation';
 const ViewPotdFromCount = ({ width }) => {
 
     const { setCount } = usePicsParameters();
-    // const navigate = useNavigate();
     const { replace } = useRouter();
 
     const setCountValue = () => {
-        setCount(0);
+        if (typeof window !== 'undefined') {
+            setCount(0);
 
-        const value = document.getElementById('count').value;
-        if (value < 1 || value > 20) {
-            toast.error(`Enter a number from 1 to 20`);
-            return;
+            const value = document.getElementById('count').value;
+            if (value < 1 || value > 20) {
+                toast.error(`Enter a number from 1 to 20`);
+                return;
+            }
+
+            setCount(value);
+            localStorage.setItem("count", value);
+            replace('/explore/potd/pics-from-count');
         }
-
-        setCount(value);
-        localStorage.setItem("count", value);
-        replace('/explore/potd/pics-from-count');
     }
 
     return (

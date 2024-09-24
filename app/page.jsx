@@ -10,11 +10,12 @@ const Home = () => {
 
   const { setScreenWidth } = useScreenWidth();
 
-  useEffect(() => {
+  if (typeof window !== 'undefined') {
+    // detect window screen width function
     window.onresize = function () {
       setScreenWidth(window.innerWidth);
     };
-  }, [])
+  }
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -25,8 +26,10 @@ const Home = () => {
       });
     });
 
-    const hiddenAlpha = document.querySelectorAll('.alphabet');
-    hiddenAlpha.forEach((el) => observer.observe(el));
+    if (typeof window !== 'undefined') {
+      const hiddenAlpha = document.querySelectorAll('.alphabet');
+      hiddenAlpha.forEach((el) => observer.observe(el));
+    }
 
     const observer2 = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -36,8 +39,10 @@ const Home = () => {
       });
     });
 
-    const hiddenItems = document.querySelectorAll('.intro-n-btn');
-    hiddenItems.forEach((el) => observer2.observe(el));
+    if (typeof window !== 'undefined') {
+      const hiddenItems = document.querySelectorAll('.intro-n-btn');
+      hiddenItems.forEach((el) => observer2.observe(el));
+    }
   }, []);
 
   return (

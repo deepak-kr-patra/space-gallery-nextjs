@@ -11,18 +11,19 @@ const PicSectionContent = ({ imageData, slideNumber, totalItems }) => {
     const { screenWidth } = useScreenWidth();
 
     useEffect(() => {
-        let explanationBoxes = document.querySelectorAll('.explanationBox');
-
-        explanationBoxes.forEach(explanationBox => {
-            explanationBox.classList.remove('show-scrollbar');
-
-            if (explanationBox.scrollHeight > explanationBox.clientHeight) {
-                explanationBox.classList.add('show-scrollbar');
-            } else {
+        if (typeof window !== 'undefined') {
+            let explanationBoxes = document.querySelectorAll('.explanationBox');
+    
+            explanationBoxes.forEach(explanationBox => {
                 explanationBox.classList.remove('show-scrollbar');
-            }
-        });
-
+    
+                if (explanationBox.scrollHeight > explanationBox.clientHeight) {
+                    explanationBox.classList.add('show-scrollbar');
+                } else {
+                    explanationBox.classList.remove('show-scrollbar');
+                }
+            });
+        }
     }, [screenWidth]);
 
     const flexDir = screenWidth < 450 ? "flex-col gap-2" : "";
