@@ -10,9 +10,11 @@ const Home = () => {
 
   const { setScreenWidth } = useScreenWidth();
 
-  window.onresize = function () {
-    setScreenWidth(window.innerWidth);
-  };
+  useEffect(() => {
+    window.onresize = function () {
+      setScreenWidth(window.innerWidth);
+    };
+  }, [])
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {

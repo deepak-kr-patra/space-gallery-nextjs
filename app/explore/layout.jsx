@@ -3,6 +3,7 @@
 import { usePathname, useRouter } from 'next/navigation';
 import useScreenWidth from '../zustand/useScreenWidth'
 import { IoArrowBack } from "react-icons/io5";
+import { useEffect } from 'react';
 
 
 const Layout = ({ children }) => {
@@ -23,9 +24,11 @@ const Layout = ({ children }) => {
 
     const { screenWidth, setScreenWidth } = useScreenWidth();
 
-    window.onresize = function () {
-        setScreenWidth(window.innerWidth);
-    };
+    useEffect(() => {
+        window.onresize = function () {
+            setScreenWidth(window.innerWidth);
+        };
+    }, [])
 
     const boxWidth = screenWidth > 1100 ? "w-[60%]" : screenWidth <= 1100 && screenWidth > 500 ? "w-[80%]" : "w-[90%]";
     const padding = screenWidth < 500 ? "p-4" : "p-6";
